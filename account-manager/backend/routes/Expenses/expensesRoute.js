@@ -30,4 +30,8 @@ router.post('/add', (req, res) => {
     }
 });
 
+router.get('/sorted', (req, res) => {
+    Purchase.find({}).sort({ datePurchase: 'ascending' }).exec(function (err, docs) { res.json(docs) })
+});
+
 module.exports = router;

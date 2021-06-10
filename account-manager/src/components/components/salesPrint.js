@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import moment from 'moment'
+import SalesDelete from './salesDelete';
 
 function SalesPrint(props) {
     return (
@@ -13,6 +14,7 @@ function SalesPrint(props) {
             <td>$ {props.sale.totalSales}</td>
             <td>$ {props.sale.epaySales}</td>
             <td>$ {props.sale.eftposSales}</td>
+            <td><SalesDelete toDelete={props.sale._id} /></td>
 
             {/* button to edit card */}
             {/* <td><Link to={"/cardSearch/editCard/" + props.card._id}>
