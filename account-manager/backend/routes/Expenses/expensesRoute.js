@@ -1,37 +1,39 @@
-const router = require('express').Router();
-let Purchase = require('../../models/Expenses/expensesModel');
-let moment = require('moment');
+const router = require("express").Router();
+let Purchase = require("../../models/Expenses/expensesModel");
+// let moment = require('moment');
 
 //all purchases
-router.route('/').get((req, res) => {
-    Purchase.find()
-        .then(expenses => res.json(expenses))
-        .catch(err => res.status(400).json('ERROR: ' + err));
+router.route("/").get((req, res) => {
+	Purchase.find()
+		.then((expenses) => res.json(expenses))
+		.catch((err) => res.status(400).json("ERROR: " + err));
 });
 
 //add purchase
-router.post('/add', (req, res) => {
+router.post("/add", (req, res) => {
+	const newPurchase = new Purchase({
+		datePurchase: req.body.datePurchase,
+		companyNamePurchase: req.body.companyNamePurchase,
+		totalPurchase: req.body.totalPurchase,
+		GST: req.body.GST,
+	});
 
-    const newPurchase = new Purchase({
-        datePurchase: req.body.datePurchase,
-        companyNamePurchase: req.body.companyNamePurchase,
-        totalPurchase: req.body.totalPurchase,
-        GST: req.body.GST,
-    });
-
-    console.log("router new sales: " + newPurchase);
-    try {
-        newPurchase.save();
-        // res.json({ "router new sales: ": newSales })
-        res.json({ "success": true })
-    }
-    catch (err) {
-        res.status(400).send(err)
-    }
+	console.log("router new sales: " + newPurchase);
+	try {
+		newPurchase.save();
+		// res.json({ "router new sales: ": newSales })
+		res.json({ success: true });
+	} catch (err) {
+		res.status(400).send(err);
+	}
 });
 
-router.get('/sorted', (req, res) => {
-    Purchase.find({}).sort({ datePurchase: 'ascending' }).exec(function (err, docs) { res.json(docs) })
+router.get("/sorted", (req, res) => {
+	Purchase.find({})
+		.sort({ datePurchase: "ascending" })
+		.exec(function (err, docs) {
+			res.json(docs);
+		});
 });
 
 module.exports = router;

@@ -1,9 +1,9 @@
 //connection to mongoDB
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
 
-require('dotenv').config();
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -12,23 +12,22 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
-);
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
 
 const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log("account mongodb connection succesful");
-})
+connection.once("open", () => {
+	console.log("account mongodb connection succesful");
+});
 
 //connects to user router
-const userRouter = require('./routes/Auth/userRoute');
-const salesRouter = require('./routes/Sales/salesRoute');
-const expensesRouter = require('./routes/Expenses/expensesRoute');
+const userRouter = require("./routes/Auth/userRoute");
+const salesRouter = require("./routes/Sales/salesRoute");
+const expensesRouter = require("./routes/Expenses/expensesRoute");
 
-app.use('/users', userRouter);
-app.use('/sales', salesRouter);
-app.use('/purchase', expensesRouter);
+app.use("/users", userRouter);
+app.use("/sales", salesRouter);
+app.use("/purchase", expensesRouter);
 
 app.listen(port, () => {
-    console.log(`server is running yay: ${port}`);
+	console.log(`server is running yay: ${port}`);
 });
