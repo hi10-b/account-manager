@@ -2,9 +2,9 @@ import React, { Component, useState } from "react";
 import { Form, Button, Row, Col, Table, Container } from "react-bootstrap";
 import axios from "axios";
 import PurchasePrint from "./purchasePrint";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 // import DatePicker from 'react-date-picker';
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 // import "react-date-picker/dist/DatePicker.css";
 // import moment from 'moment';
 class Purchase extends Component {
@@ -96,11 +96,11 @@ class Purchase extends Component {
                                 <Form.Control type="date" placeholder="Date" required onChange={this.chDateSales} />
                             </Form.Group> */}
 							<Form.Group>
-								<DatePicker
+								{/* <DatePicker
 									format={"y-MM-dd"}
 									selected={this.state.datePurchase}
 									onChange={this.chDatePurchase}
-								/>
+								/> */}
 							</Form.Group>
 							<Form.Group>
 								<Form.Label>Company Name</Form.Label>
