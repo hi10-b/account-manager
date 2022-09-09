@@ -27,7 +27,7 @@ const expensesRouter = require('./routes/Expenses/expensesRoute');
 
 app.use('/users', userRouter);
 app.use('/sales', salesRouter);
-app.use('/purchase', expensesRouter);
+app.use('/expenses', expensesRouter);
 
 app.listen(port, () => {
 	console.log(`server is running yay: ${port}`);

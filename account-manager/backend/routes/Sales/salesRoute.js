@@ -23,7 +23,7 @@ router.post('/add', (req, res) => {
 	try {
 		newSales.save();
 		console.log({ 'router new sales: ': newSales });
-		res.json({ success: true });
+		res.json(newSales);
 	} catch (err) {
 		res.status(400).send(err);
 	}
@@ -34,6 +34,19 @@ router.get('/sorted', (req, res) => {
 		.sort({ dateSales: 'ascending' })
 		.exec(function (err, docs) {
 			res.json(docs);
+		});
+});
+
+router.delete('/:id', (req, res) => {
+	Sales.findByIdAndDelete(req.params.id)
+		.then((sales) => {
+			if (!sales) {
+				return res.status(404).send();
+			}
+			res.send(sales);
+		})
+		.catch((error) => {
+			res.status(500).send(error);
 		});
 });
 

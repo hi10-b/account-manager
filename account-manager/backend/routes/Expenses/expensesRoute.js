@@ -1,26 +1,26 @@
-const router = require("express").Router();
-let Purchase = require("../../models/Expenses/expensesModel");
+const router = require('express').Router();
+let Purchase = require('../../models/Expenses/expensesModel');
 // let moment = require('moment');
 
 //all purchases
-router.route("/").get((req, res) => {
+router.route('/').get((req, res) => {
 	Purchase.find()
 		.then((expenses) => res.json(expenses))
-		.catch((err) => res.status(400).json("ERROR: " + err));
+		.catch((err) => res.status(400).json('ERROR: ' + err));
 });
 
 //add purchase
-router.post("/add", (req, res) => {
+router.post('/add', (req, res) => {
 	const newPurchase = new Purchase({
-		datePurchase: req.body.datePurchase,
-		companyNamePurchase: req.body.companyNamePurchase,
-		totalPurchase: req.body.totalPurchase,
-		GST: req.body.GST,
+		dateExpense: req.body.dateExpense,
+		companyName: req.body.companyName,
+		totalExpense: req.body.totalExpense,
+		gst: req.body.gst,
 	});
 
-	console.log("router new sales: " + newPurchase);
 	try {
 		newPurchase.save();
+		console.log('router new Expense: ' + newPurchase);
 		// res.json({ "router new sales: ": newSales })
 		res.json({ success: true });
 	} catch (err) {
@@ -28,9 +28,9 @@ router.post("/add", (req, res) => {
 	}
 });
 
-router.get("/sorted", (req, res) => {
+router.get('/sorted', (req, res) => {
 	Purchase.find({})
-		.sort({ datePurchase: "ascending" })
+		.sort({ datePurchase: 'ascending' })
 		.exec(function (err, docs) {
 			res.json(docs);
 		});
